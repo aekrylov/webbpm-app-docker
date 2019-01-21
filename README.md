@@ -29,6 +29,15 @@ You need to specify webbpm-app version
     
 2. Deploy applications using the management port, if needed
 
+## Inheriting image for a specific application
+
+See [Dockerfile-zags](./Dockerfile-zags)
+How to run this (assuming zags.ear and standalone.xml set up beforehand): 
+```bash
+docker build -t zags/zags:1.0 .
+docker run -p 80:8080 zags/zags:1.0
+```
+
 ## TODO
 - [ ] Volumes for data,tmp and standalone.xml
 - [ ] Easy FS based deployment

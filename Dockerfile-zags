@@ -1,0 +1,4 @@
+FROM aekrylov/webbpm-app:1.22.3
+
+COPY zags.ear /opt/webbpm-app/standalone/deployments/
+COPY standalone.xml /opt/webbpm-app/standalone/configuration/
