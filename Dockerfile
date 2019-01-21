@@ -23,4 +23,4 @@ EXPOSE 8080
 EXPOSE 9990
 EXPOSE 8787
 
-CMD ["run.sh"]
+CMD ["/run.sh"]
