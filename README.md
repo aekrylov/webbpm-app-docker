@@ -12,7 +12,7 @@ You need to specify webbpm-app version
 
     ```bash
     docker run -d -p 8080:8080 -p 9990:9990 -p 8787:8787 \
-     -v $(pwd)/standalone.xml:/opt/webbpm-app/standalone/configuration/standalone.xml \
+     -v $(pwd)/standalone.xml:/standalone.xml \
      aekrylov/webbpm-app:1.22.3
     ```
     
@@ -22,8 +22,8 @@ You need to specify webbpm-app version
     Optionally: also provide a deployment using bind mount, e.g.:
     ```bash
     docker run -d -p 8080:8080 -p 9990:9990 -p 8787:8787 \
-     -v $(pwd)/standalone.xml:/opt/webbpm-app/standalone/configuration/standalone.xml \
-     -v $(pwd)/app.ear:/opt/webbpm-app/standalone/deployments/app.ear \
+     -v $(pwd)/standalone.xml:/standalone.xml \
+     -v $(pwd)/app.ear:/apps/app.ear \
      aekrylov/webbpm-app:1.22.3
     ```
     

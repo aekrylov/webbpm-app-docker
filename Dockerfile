@@ -2,6 +2,8 @@ FROM anapsix/alpine-java:8_jdk-dcevm
 
 ARG APP_VERSION
 
+ADD run.sh /
+
 RUN apk add -q aria2 && \
     aria2c -x 8 -s 8 -o app.zip http://artifactory.cg.ru/artifactory/simple/libs-releases-local/ru/cg/webbpm/webbpm-app-prod/${APP_VERSION}/webbpm-app-prod-${APP_VERSION}.zip && \
     unzip -q app.zip && \
@@ -21,4 +23,4 @@ EXPOSE 8080
 EXPOSE 9990
 EXPOSE 8787
 
-CMD ["bin/standalone.sh", "--read-only-server-config=standalone.xml"]
+CMD ["run.sh"]
