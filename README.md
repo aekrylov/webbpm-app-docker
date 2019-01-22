@@ -2,12 +2,11 @@
 
 The image is based on DCEVM-enabled JDK and webbpm-app-prod
 
-## How to build
-
+## Building the base image
 You need to specify webbpm-app version
 `docker build --build-arg APP_VERSION=<webbpm-app-prod version> .`
 
-## How to run
+## Running the base image
 1. Mount `standalone.xml`:
 
     ```bash
@@ -29,15 +28,21 @@ You need to specify webbpm-app version
     
 2. Deploy applications using the management port, if needed
 
-## Inheriting image for a specific application
+## Using an application specific image
+You'll need to package your app and prepare your standalone.xml outside of Docker, see [Dockerfile-zags](./Dockerfile-zags)
 
-See [Dockerfile-zags](./Dockerfile-zags)
-How to run this (assuming zags.ear and standalone.xml set up beforehand): 
+How to build and run the app: 
 ```bash
-docker build -t zags/zags:1.0 .
-docker run -p 80:8080 zags/zags:1.0
+docker build -t zags-develop -f Dockerfile-zags .
+docker run -p 80:8080 -p 9990:9990 zags-develop
 ```
+
+## Performance concerns
+**TODO**
 
 ## TODO
 - [ ] Volumes for data,tmp and standalone.xml
 - [ ] Easy FS based deployment
+- [ ] Build using vanilla Wildfly + patches
+- [ ] Build projects in Docker (if feasible)
+- [ ] Ensure hotswap and debug mode are both working
