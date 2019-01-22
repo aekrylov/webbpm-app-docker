@@ -1,12 +1,13 @@
 FROM anapsix/alpine-java:8_jdk-dcevm
 
 ARG APP_VERSION
+ARG APP_TYPE=prod
 
 ADD run.sh /
 RUN chmod +x /run.sh
 
 RUN apk add -q aria2 && \
-    aria2c -x 8 -s 8 -o app.zip http://artifactory.cg.ru/artifactory/simple/libs-releases-local/ru/cg/webbpm/webbpm-app-prod/${APP_VERSION}/webbpm-app-prod-${APP_VERSION}.zip && \
+    aria2c -x 8 -s 8 -o app.zip http://artifactory.cg.ru/artifactory/simple/libs-releases-local/ru/cg/webbpm/webbpm-app-${APP_TYPE}/${APP_VERSION}/webbpm-app-${APP_TYPE}-${APP_VERSION}.zip && \
     unzip -q app.zip && \
     mv webbpm-app /opt/ && \
     rm app.zip && \
