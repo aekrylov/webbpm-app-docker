@@ -29,11 +29,11 @@ You need to specify webbpm-app version
 2. Deploy applications using the management port, if needed
 
 ## Using an application specific image
-You'll need to package your app and prepare your standalone.xml outside of Docker, see [Dockerfile-zags](./Dockerfile-zags)
+You'll need to package your app and prepare your standalone.xml outside of Docker, see [Dockerfile-app](Dockerfile-app)
 
 How to build and run the app: 
 ```bash
-docker build -t zags-develop -f Dockerfile-zags .
+docker build -t zags-develop -f Dockerfile-app .
 docker run -p 80:8080 -p 9990:9990 zags-develop
 ```
 
