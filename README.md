@@ -41,13 +41,13 @@ docker run -p 80:8080 -p 9990:9990 zags-develop
 
 See [Dockerfile-builder](Dockerfile-builder)
 
+A separate volume should be used for maven cache, to enable caching between builds, e.g. 
+
+```docker volume create m2-cache```
+
 Example usage: 
 ```bash
-# Build the builder image
-docker build -t webbpm-builder -f Dockerfile-builder ../webbpm-app-docker
-
-# Use builder to build the app, storing maven cache in a volume
-docker run -it --rm -v "$(pwd)":/usr/src/app -v m2-cache:/root/.m2 -w /usr/src/app webbpm-builder
+docker run -it --rm -v "$(pwd)":/usr/src/app -v m2-cache:/root/.m2 -w /usr/src/app aekrylov/webbpm-builder
 ```
 
 ## Performance concerns
