@@ -1,0 +1,7 @@
+FROM maven:3.6-jdk-8
+
+# Install required nodejs version
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
+RUN apt-get install -y nodejs
+
+CMD mvn clean && mvn package -P CI,dev

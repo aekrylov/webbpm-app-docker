@@ -37,6 +37,19 @@ docker build -t zags-develop -f Dockerfile-app .
 docker run -p 80:8080 -p 9990:9990 zags-develop
 ```
 
+## Building a project using Docker
+
+See [Dockerfile-builder](Dockerfile-builder)
+
+Example usage: 
+```bash
+# Build the builder image
+docker build -t webbpm-builder -f Dockerfile-builder ../webbpm-app-docker
+
+# Use builder to build the app, storing maven cache in a volume
+docker run -it --rm -v "$(pwd)":/usr/src/app -v m2-cache:/root/.m2 -w /usr/src/app webbpm-builder
+```
+
 ## Performance concerns
 **TODO**
 
