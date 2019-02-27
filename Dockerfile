@@ -9,7 +9,7 @@ RUN chmod +x /run.sh
 RUN apk add -q aria2 && \
     aria2c -x 8 -s 8 -o app.zip http://artifactory.cg.ru/artifactory/simple/libs-releases-local/ru/cg/webbpm/webbpm-app-${APP_TYPE}/${APP_VERSION}/webbpm-app-${APP_TYPE}-${APP_VERSION}.zip && \
     unzip -q app.zip && \
-    rm -rf webbpm-app/jre
+    rm -rf webbpm-app/jre && \
     mv webbpm-app /opt/ && \
     rm app.zip && \
     apk del -q aria2
