@@ -3,6 +3,8 @@ FROM anapsix/alpine-java:8_jdk-dcevm
 ARG APP_VERSION
 ARG APP_TYPE=prod
 
+RUN apk add -q curl
+
 RUN apk add -q aria2 && \
     aria2c -x 8 -s 8 -o app.zip http://artifactory.cg.ru/artifactory/simple/libs-releases-local/ru/cg/webbpm/webbpm-app-${APP_TYPE}/${APP_VERSION}/webbpm-app-${APP_TYPE}-${APP_VERSION}.zip && \
     unzip -q app.zip && \
@@ -20,6 +22,8 @@ RUN chmod +x bin/*.sh
 
 RUN ln -sf /opt/webbpm-app/standalone/deployments /apps
 RUN ln -sf /opt/webbpm-app/standalone/configuration /config
+
+HEALTHCHECK --timeout=3s --start-period=3600s CMD curl -f http://localhost/ || exit 1
 
 # TODO
 #VOLUME ["/opt/webbpm-app/standalone/deployments", "/opt/webbpm-app/standalone/data", "/opt/webbpm-app/standalone/tmp", "/opt/webbpm-app/standalone/configuration/standalone.xml"]
