@@ -5,4 +5,19 @@ RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get install -qy nodejs
 
 # Install additional tools
-RUN apt-get install -qy zip unzip cabextract aria2 p7zip-full rsync
+RUN apt-get install -qy zip unzip cabextract aria2 p7zip-full rsync expect
+
+# Copy SSH keys
+COPY .ssh /root/.ssh
+
+# Set up Maven auth
+COPY settings.xml /root/.m2/repository/
+
+# Set up NPM auth
+ARG NPM_REGISTRY
+ARG NPM_USER
+ARG NPM_PASSWORD
+ARG NPM_EMAIL
+
+COPY npm-login.sh .
+RUN npm-login.sh
