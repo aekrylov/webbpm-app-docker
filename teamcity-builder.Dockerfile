@@ -11,7 +11,7 @@ RUN apt-get install -qy zip unzip cabextract aria2 p7zip-full rsync
 COPY .ssh /root/.ssh
 
 # Set up Maven auth
-COPY settings.xml /root/.m2/repository/
+COPY settings.xml /root/.m2/
 
 # Set up NPM auth
 COPY .npmrc /root/
