@@ -1,7 +1,7 @@
 FROM jetbrains/teamcity-agent:2019.1.2
 
 # Install utility packages for builds
-RUN apt-get update && apt-get install -qy zip unzip cabextract aria2 p7zip-full rsync
+RUN apt-get -q update && apt-get install -qy zip unzip cabextract aria2 p7zip-full rsync
 
 # Install JavaFX
 # TODO wrong; installs one more openjdk copy
