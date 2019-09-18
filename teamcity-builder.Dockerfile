@@ -4,8 +4,11 @@ FROM jetbrains/teamcity-agent:2019.1.2
 RUN apt-get -q update && apt-get install -qy zip unzip cabextract aria2 p7zip-full rsync
 
 # Install JavaFX
-# TODO wrong; installs one more openjdk copy
-RUN apt-get install -qy openjfx=8u161-b12-1ubuntu2 libopenjfx-jni=8u161-b12-1ubuntu2 libopenjfx-java=8u161-b12-1ubuntu2
+#TODO clean up afterwards
+RUN apt-get download libopenjfx-java=8u161-b12-1ubuntu2 \
+    && dpkg -x libopenjfx-java_8u161-b12-1ubuntu2*.deb openjfx \
+    && cp -r openjfx/usr/share/java/openjfx/* /opt/java/openjdk/ \
+    && rm -rf openjfx
 
 # Install required nodejs version
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
@@ -21,3 +24,4 @@ COPY settings.xml /root/.m2/
 COPY .npmrc /root/
 
 # TODO make Docker available
+# TODO chrome headless dependencies
